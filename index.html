@@ -1,0 +1,1754 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sweet Onion Chicken Teriyaki Training</title>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: #ffffff;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        .training-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .rtl {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .rtl .header {
+            flex-direction: row-reverse;
+        }
+
+        .rtl .logo-section {
+            flex-direction: row-reverse;
+        }
+
+        .rtl .stats-bar {
+            flex-direction: row-reverse;
+        }
+
+        .rtl .main-content {
+            flex-direction: row-reverse;
+        }
+
+        .rtl .customer-area {
+            border-right: none;
+            border-left: 3px solid #00923f;
+        }
+
+        .rtl .step-header {
+            flex-direction: row-reverse;
+        }
+
+        .rtl .action-buttons {
+            flex-direction: row-reverse;
+        }
+
+        .rtl .language-selector {
+            left: 1rem;
+            right: auto;
+        }
+
+        .rtl .customer-speech::before {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .rtl .check-toggle {
+            margin-left: 1rem;
+            margin-right: 0;
+        }
+
+        .rtl .safety-check-item {
+            flex-direction: row-reverse;
+        }
+
+        .rtl .checklist-actions {
+            flex-direction: row-reverse;
+        }
+
+        .header {
+            background: #00923f;
+            color: #ffffff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: #ffcc02;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #00923f;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            height: calc(100vh - 80px);
+        }
+
+        .customer-area {
+            width: 30%;
+            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 2rem;
+            border-right: 3px solid #00923f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .customer-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .customer-speech {
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            margin-bottom: 1rem;
+            max-width: 250px;
+        }
+
+        .customer-speech::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #ffffff;
+        }
+
+        .order-details {
+            background: #fff3cd;
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #ffc107;
+            margin-top: 1rem;
+        }
+
+        .workspace {
+            flex: 1;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .step-header {
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .step-info h2 {
+            margin: 0 0 0.5rem 0;
+            color: #00923f;
+            font-size: 1.5rem;
+        }
+
+        .step-counter {
+            background: #00923f;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+
+        .timer-display {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #dc3545;
+        }
+
+        .ingredient-station {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            flex: 1;
+        }
+
+        .ingredient-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .ingredient-item {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .ingredient-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .ingredient-item.selected {
+            border-color: #00923f;
+            background: #e8f5e8;
+        }
+
+        .ingredient-item.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .ingredient-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stock-indicator {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #28a745;
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .stock-indicator.low {
+            background: #ffc107;
+        }
+
+        .stock-indicator.out {
+            background: #dc3545;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #00923f;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #007a35;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffcc02, #00923f);
+            transition: width 0.5s ease;
+        }
+
+        .sandwich-preview {
+            width: 200px;
+            height: 100px;
+            background: #8B4513;
+            border-radius: 50px;
+            margin: 1rem auto;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .sandwich-layer {
+            position: absolute;
+            width: 100%;
+            height: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .bread-top {
+            top: 0;
+            background: #DEB887;
+            border-radius: 50px 50px 0 0;
+        }
+
+        .bread-bottom {
+            bottom: 0;
+            background: #DEB887;
+            border-radius: 0 0 50px 50px;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .loading-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #00923f;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .completion-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: #28a745;
+            margin-bottom: 1rem;
+        }
+
+        .safety-checklist-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+
+        .checklist-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .checklist-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .checklist-header h2 {
+            color: #dc3545;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.8rem;
+        }
+
+        .checklist-header p {
+            color: #6c757d;
+            margin: 0;
+        }
+
+        .safety-checks {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .safety-check-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #dc3545;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .safety-check-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .safety-check-item.completed {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+
+        .check-toggle {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #dc3545;
+            border-radius: 4px;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .safety-check-item.completed .check-toggle {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+
+        .check-content {
+            flex: 1;
+        }
+
+        .check-title {
+            font-weight: bold;
+            color: #00923f;
+            margin-bottom: 0.25rem;
+        }
+
+        .check-description {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin: 0;
+        }
+
+        .checklist-progress {
+            background: #e9ecef;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .checklist-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #dc3545, #28a745);
+            transition: width 0.3s ease;
+        }
+
+        .checklist-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .start-training-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .start-training-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .start-training-btn:not(:disabled):hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .welcome-screen {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            color: #00923f;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-description {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+        .start-btn {
+            background: #ffcc02;
+            color: #00923f;
+            border: none;
+            padding: 1.5rem 3rem;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 4px 15px rgba(255, 204, 2, 0.3);
+        }
+
+        .start-btn:hover {
+            background: #e6b800;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 204, 2, 0.4);
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .customer-area {
+                width: 100%;
+                padding: 1rem;
+            }
+            
+            .ingredient-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="training-container">
+   <header class="header">
+    <div class="logo-section">
+     <div class="logo">
+      🥪
+     </div>
+     <div>
+      <h1 id="course-title" style="margin: 0; font-size: 1.2rem;">Sweet Onion Chicken Teriyaki Training</h1>
+      <p id="store-name" style="margin: 0; opacity: 0.8; font-size: 0.9rem;">Downtown Training Center</p>
+     </div>
+    </div>
+    <div class="stats-bar">
+     <div class="stat-item"><span>⏱️</span> <span id="session-timer">00:00</span>
+     </div>
+     <div class="stat-item"><span>📊</span> <span id="score-display">Score: 0</span>
+     </div>
+     <div class="stat-item"><span>❌</span> <span id="mistakes-display">Mistakes: 0</span>
+     </div>
+     <div class="language-selector"><button class="lang-btn active" onclick="setLanguage('en')" id="lang-en">English</button> <button class="lang-btn" onclick="setLanguage('ur')" id="lang-ur">اردو</button>
+     </div>
+    </div>
+   </header>
+   <main class="main-content" id="main-content" style="display: none;">
+    <div class="customer-area">
+     <div class="customer-avatar">
+      👨‍💼
+     </div>
+     <div class="customer-speech">
+      <p id="customer-dialogue">"Hi! I'd like a Sweet Onion Chicken Teriyaki sandwich please. Make it fresh!"</p>
+     </div>
+     <div class="order-details">
+      <h4>📋 Order Details</h4>
+      <p><strong>Customer:</strong> <span id="customer-name">Alex</span></p>
+      <p><strong>Item:</strong> Sweet Onion Chicken Teriyaki</p>
+      <p><strong>Size:</strong> 6-inch</p>
+      <p><strong>Status:</strong> <span id="order-status">Waiting</span></p>
+     </div>
+     <div class="sandwich-preview" id="sandwich-preview">
+      <div class="sandwich-layer bread-top"></div>
+      <div class="sandwich-layer bread-bottom"></div>
+     </div>
+    </div>
+    <div class="workspace">
+     <div class="step-header">
+      <div class="step-info">
+       <h2 id="step-title">Step 1: Choose Your Bread</h2>
+       <p id="step-description">Select the bread type for the sandwich. The customer is waiting!</p>
+       <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill" style="width: 12.5%"></div>
+       </div>
+      </div>
+      <div class="step-counter" id="step-counter">
+       1/8
+      </div>
+      <div class="timer-display">
+       ⏰ <span id="step-timer">30</span>s
+      </div>
+     </div>
+     <div class="ingredient-station">
+      <div id="ingredient-content"><!-- Dynamic content will be loaded here -->
+      </div>
+      <div class="action-buttons"><button class="btn btn-secondary" id="help-btn"> 💡 Need Help? </button> <button class="btn btn-primary" id="next-btn" disabled> ➡️ Continue </button>
+      </div>
+     </div>
+    </div>
+   </main><!-- Welcome Screen -->
+   <div class="welcome-screen" id="welcome-screen">
+    <h1 class="welcome-title">🥪 Welcome to Training!</h1>
+    <p class="welcome-subtitle">Sweet Onion Chicken Teriyaki Sandwich Making Course</p>
+    <p class="welcome-description">Before we begin serving customers, let's make sure you're ready to provide safe, quality food service.</p><button class="start-btn" onclick="showSafetyChecklist()"> 🚀 Start Making Sandwich </button>
+   </div>
+  </div><!-- Loading Overlay -->
+  <div class="loading-overlay" id="loading-overlay" style="display: none;">
+   <div class="loading-content">
+    <div class="spinner"></div>
+    <p>Preparing your food...</p>
+   </div>
+  </div><!-- Safety Checklist Modal -->
+  <div class="safety-checklist-modal" id="safety-checklist-modal" style="display: none;">
+   <div class="checklist-content">
+    <div class="checklist-header">
+     <h2>🛡️ Food Safety Checklist</h2>
+     <p>Complete all safety checks before handling food (As Per SOP)</p>
+    </div>
+    <div class="checklist-progress">
+     <div class="checklist-progress-fill" id="checklist-progress-fill" style="width: 0%"></div>
+    </div>
+    <div class="safety-checks" id="safety-checks"><!-- Safety check items will be loaded here -->
+    </div>
+    <div class="checklist-actions"><button class="start-training-btn" id="start-training-btn" disabled onclick="startActualTraining()"> ✅ Begin Training </button>
+    </div>
+   </div>
+  </div><!-- Completion Modal -->
+  <div class="completion-modal" id="completion-modal" style="display: none;">
+   <div class="modal-content">
+    <div class="success-icon">
+     🎉
+    </div>
+    <h2>Congratulations!</h2>
+    <p>You've successfully completed the Sweet Onion Chicken Teriyaki training!</p>
+    <div id="final-stats"></div><button class="btn btn-primary" onclick="restartTraining()"> 🔄 Train Again </button>
+   </div>
+  </div>
+  <script>
+        // Configuration object
+        const defaultConfig = {
+            course_title: "Sweet Onion Chicken Teriyaki Training",
+            customer_name: "Alex",
+            store_name: "Downtown Training Center"
+        };
+
+        // Training state
+        let currentStep = 1;
+        let sessionStartTime = Date.now();
+        let stepStartTime = Date.now();
+        let stepTimer = 30;
+        let stepInterval;
+        let sessionInterval;
+        let score = 0;
+        let mistakes = 0;
+        let selectedItems = [];
+        let currentRecordCount = 0;
+        let safetyChecksCompleted = [];
+        let trainingStarted = false;
+        let currentLanguage = 'en';
+
+        // Language content
+        const content = {
+            en: {
+                welcomeTitle: "🥪 Welcome to Training!",
+                welcomeSubtitle: "Sweet Onion Chicken Teriyaki Sandwich Making Course",
+                welcomeDescription: "Before we begin serving customers, let's make sure you're ready to provide safe, quality food service.",
+                startButton: "🚀 Start Making Sandwich",
+                safetyTitle: "🛡️ Food Safety Checklist",
+                safetySubtitle: "Complete all safety checks before handling food (As Per SOP)",
+                beginTraining: "✅ Begin Training",
+                allChecksComplete: "✅ All Checks Complete - Begin Training",
+                completeAllChecks: "✅ Complete All Checks",
+                customerOrder: "Hi! I'd like a Sweet Onion Chicken Teriyaki sandwich please. Make it fresh!",
+                orderDetails: "📋 Order Details",
+                customer: "Customer:",
+                item: "Item:",
+                size: "Size:",
+                status: "Status:",
+                waiting: "Waiting",
+                inProgress: "In Progress",
+                completed: "Completed ✅",
+                needHelp: "💡 Need Help?",
+                continue: "➡️ Continue",
+                congratulations: "Congratulations!",
+                completionMessage: "You've successfully completed the Sweet Onion Chicken Teriyaki training!",
+                trainAgain: "🔄 Train Again",
+                finalScore: "Final Score:",
+                totalTime: "Total Time:",
+                mistakes: "Mistakes:",
+                grade: "Grade:",
+                availableOptions: "Available Options",
+                stock: "Stock:",
+                preparingFood: "Preparing your food...",
+                timeoutMessage: "Um, are you still there? I'm getting a bit impatient...",
+                perfectMessage: "Perfect! This is exactly what I wanted. You're a natural!"
+            },
+            ur: {
+                welcomeTitle: "🥪 Training میں خوش آمدید!",
+                welcomeSubtitle: "Sweet Onion Chicken Teriyaki Sandwich بنانے کا Course",
+                welcomeDescription: "Customers کو serve کرنے سے پہلے، آئیے یقینی بنائیں کہ آپ safe اور quality food service فراہم کرنے کے لیے تیار ہیں۔",
+                startButton: "🚀 Sandwich بنانا شروع کریں",
+                safetyTitle: "🛡️ Food Safety Checklist",
+                safetySubtitle: "Food handle کرنے سے پہلے تمام safety checks مکمل کریں (SOP کے مطابق)",
+                beginTraining: "✅ Training شروع کریں",
+                allChecksComplete: "✅ تمام Checks مکمل - Training شروع کریں",
+                completeAllChecks: "✅ تمام Checks مکمل کریں",
+                customerOrder: "السلام علیکم! مجھے ایک Sweet Onion Chicken Teriyaki sandwich چاہیے۔ Fresh بنائیں!",
+                orderDetails: "📋 Order کی Details",
+                customer: "Customer:",
+                item: "Item:",
+                size: "Size:",
+                status: "Status:",
+                waiting: "انتظار میں",
+                inProgress: "جاری ہے",
+                completed: "مکمل ✅",
+                needHelp: "💡 Help چاہیے؟",
+                continue: "➡️ آگے بڑھیں",
+                congratulations: "مبارک ہو!",
+                completionMessage: "آپ نے Sweet Onion Chicken Teriyaki training کامیابی سے مکمل کی ہے!",
+                trainAgain: "🔄 دوبارہ Training کریں",
+                finalScore: "Final Score:",
+                totalTime: "Total Time:",
+                mistakes: "Mistakes:",
+                grade: "Grade:",
+                availableOptions: "دستیاب Options",
+                stock: "Stock:",
+                preparingFood: "آپ کا food تیار کر رہے ہیں...",
+                timeoutMessage: "کیا آپ ابھی بھی وہاں ہیں؟ میں تھوڑا بے صبر ہو رہا ہوں...",
+                perfectMessage: "Perfect! یہ بالکل وہی ہے جو میں چاہتا تھا۔ آپ بہت اچھے ہیں!"
+            }
+        };
+
+        // Food Safety Checklist (Bilingual)
+        const safetyChecklist = {
+            en: [
+                {
+                    id: 'hands',
+                    title: 'Wash Hands Thoroughly',
+                    description: 'Wash hands for 20 seconds with soap and warm water'
+                },
+                {
+                    id: 'gloves',
+                    title: 'Put On Fresh Gloves',
+                    description: 'Use new, clean disposable gloves for food handling'
+                },
+                {
+                    id: 'surface',
+                    title: 'Clean Work Surface',
+                    description: 'Sanitize cutting board and work area with approved cleaner'
+                },
+                {
+                    id: 'temperature',
+                    title: 'Check Food Temperatures',
+                    description: 'Verify all ingredients are at proper storage temperatures'
+                },
+                {
+                    id: 'utensils',
+                    title: 'Use Clean Utensils',
+                    description: 'Ensure all knives and tools are properly sanitized'
+                },
+                {
+                    id: 'hair',
+                    title: 'Secure Hair/Hat',
+                    description: 'Wear hair net or hat to prevent contamination'
+                },
+                {
+                    id: 'apron',
+                    title: 'Clean Apron/Uniform',
+                    description: 'Ensure uniform is clean and apron is properly tied'
+                },
+                {
+                    id: 'allergens',
+                    title: 'Check Allergen Information',
+                    description: 'Review allergen chart and cross-contamination procedures'
+                }
+            ],
+            ur: [
+                {
+                    id: 'hands',
+                    title: 'Hands اچھی طرح دھوئیں',
+                    description: 'Soap اور گرم پانی سے 20 سیکنڈ تک hands دھوئیں'
+                },
+                {
+                    id: 'gloves',
+                    title: 'Fresh Gloves پہنیں',
+                    description: 'Food handling کے لیے نئے، صاف disposable gloves استعمال کریں'
+                },
+                {
+                    id: 'surface',
+                    title: 'Work Surface صاف کریں',
+                    description: 'Cutting board اور work area کو approved cleaner سے sanitize کریں'
+                },
+                {
+                    id: 'temperature',
+                    title: 'Food Temperatures چیک کریں',
+                    description: 'تمام ingredients کا proper storage temperature verify کریں'
+                },
+                {
+                    id: 'utensils',
+                    title: 'Clean Utensils استعمال کریں',
+                    description: 'تمام knives اور tools properly sanitized ہونے کو یقینی بنائیں'
+                },
+                {
+                    id: 'hair',
+                    title: 'Hair/Hat Secure کریں',
+                    description: 'Contamination سے بچنے کے لیے hair net یا hat پہنیں'
+                },
+                {
+                    id: 'apron',
+                    title: 'Clean Apron/Uniform',
+                    description: 'Uniform صاف ہونے اور apron properly tied ہونے کو یقینی بنائیں'
+                },
+                {
+                    id: 'allergens',
+                    title: 'Allergen Information چیک کریں',
+                    description: 'Allergen chart اور cross-contamination procedures review کریں'
+                }
+            ]
+        };
+
+        // Training steps configuration (Bilingual)
+        const trainingSteps = {
+            en: [
+                {
+                    title: "Choose Your Bread",
+                    description: "Select the bread type for the sandwich. The customer is waiting!",
+                    dialogue: "I'd like it on Italian Herbs & Cheese bread please!",
+                    timer: 30,
+                    items: [
+                        { name: "Italian Herbs & Cheese", icon: "🌿", stock: 8, correct: true },
+                        { name: "Honey Oat", icon: "🍯", stock: 5, correct: false },
+                        { name: "White Bread", icon: "🍞", stock: 12, correct: false },
+                        { name: "Wheat Bread", icon: "🌾", stock: 7, correct: false }
+                    ]
+                },
+                {
+                    title: "Heat the Chicken",
+                    description: "Warm up the teriyaki chicken in the microwave for the perfect temperature.",
+                    dialogue: "Make sure it's nice and hot!",
+                    timer: 25,
+                    items: [
+                        { name: "Microwave 30s", icon: "📱", stock: 1, correct: true },
+                        { name: "Microwave 60s", icon: "📱", stock: 1, correct: false },
+                        { name: "Skip Heating", icon: "❄️", stock: 1, correct: false },
+                        { name: "Oven Heat", icon: "🔥", stock: 1, correct: false }
+                    ]
+                },
+                {
+                    title: "Add the Chicken",
+                    description: "Place the heated teriyaki chicken evenly on the bread.",
+                    dialogue: "That smells amazing! Load it up!",
+                    timer: 20,
+                    items: [
+                        { name: "4 oz Portion", icon: "🍗", stock: 6, correct: true },
+                        { name: "2 oz Portion", icon: "🍗", stock: 8, correct: false },
+                        { name: "6 oz Portion", icon: "🍗", stock: 4, correct: false },
+                        { name: "Double Meat", icon: "🍗", stock: 2, correct: false }
+                    ]
+                },
+                {
+                    title: "Choose the Cheese",
+                    description: "Select the cheese that pairs best with teriyaki chicken.",
+                    dialogue: "What cheese goes well with teriyaki?",
+                    timer: 15,
+                    items: [
+                        { name: "Provolone", icon: "🧀", stock: 9, correct: true },
+                        { name: "American", icon: "🧀", stock: 12, correct: false },
+                        { name: "Swiss", icon: "🧀", stock: 6, correct: false },
+                        { name: "Cheddar", icon: "🧀", stock: 8, correct: false }
+                    ]
+                },
+                {
+                    title: "Toast the Sandwich",
+                    description: "Toast the sandwich to melt the cheese and warm the bread.",
+                    dialogue: "Toast it until the cheese melts perfectly!",
+                    timer: 20,
+                    items: [
+                        { name: "Light Toast", icon: "🔥", stock: 1, correct: true },
+                        { name: "Dark Toast", icon: "🔥", stock: 1, correct: false },
+                        { name: "No Toast", icon: "❄️", stock: 1, correct: false },
+                        { name: "Extra Crispy", icon: "🔥", stock: 1, correct: false }
+                    ]
+                },
+                {
+                    title: "Add Fresh Vegetables",
+                    description: "Add crisp vegetables to complement the teriyaki flavor.",
+                    dialogue: "I'll take lettuce, tomatoes, and red onions!",
+                    timer: 25,
+                    items: [
+                        { name: "Lettuce", icon: "🥬", stock: 15, correct: true },
+                        { name: "Tomatoes", icon: "🍅", stock: 10, correct: true },
+                        { name: "Red Onions", icon: "🧅", stock: 8, correct: true },
+                        { name: "Pickles", icon: "🥒", stock: 12, correct: false },
+                        { name: "Peppers", icon: "🌶️", stock: 7, correct: false },
+                        { name: "Cucumbers", icon: "🥒", stock: 9, correct: false }
+                    ]
+                },
+                {
+                    title: "Apply Sweet Onion Sauce",
+                    description: "Add the signature Sweet Onion Teriyaki sauce generously.",
+                    dialogue: "Don't forget the sweet onion sauce - that's the best part!",
+                    timer: 15,
+                    items: [
+                        { name: "2 Lines Sauce", icon: "🍯", stock: 1, correct: true },
+                        { name: "1 Line Sauce", icon: "🍯", stock: 1, correct: false },
+                        { name: "3 Lines Sauce", icon: "🍯", stock: 1, correct: false },
+                        { name: "No Sauce", icon: "❌", stock: 1, correct: false }
+                    ]
+                },
+                {
+                    title: "Wrap and Serve",
+                    description: "Wrap the sandwich properly and present it to the customer.",
+                    dialogue: "Perfect! This looks exactly what I wanted. Thank you!",
+                    timer: 20,
+                    items: [
+                        { name: "Wrap in Paper", icon: "📄", stock: 20, correct: true },
+                        { name: "Cut in Half", icon: "🔪", stock: 1, correct: true },
+                        { name: "Add to Bag", icon: "🛍️", stock: 15, correct: true },
+                        { name: "Skip Wrapping", icon: "❌", stock: 1, correct: false }
+                    ]
+                }
+            ],
+            ur: [
+                {
+                    title: "اپنی Bread منتخب کریں",
+                    description: "Sandwich کے لیے bread کی قسم select کریں۔ Customer انتظار کر رہا ہے!",
+                    dialogue: "مجھے Italian Herbs & Cheese bread پر چاہیے!",
+                    timer: 30,
+                    items: [
+                        { name: "Italian Herbs & Cheese", icon: "🌿", stock: 8, correct: true },
+                        { name: "Honey Oat", icon: "🍯", stock: 5, correct: false },
+                        { name: "White Bread", icon: "🍞", stock: 12, correct: false },
+                        { name: "Wheat Bread", icon: "🌾", stock: 7, correct: false }
+                    ]
+                },
+                {
+                    title: "Chicken گرم کریں",
+                    description: "Perfect temperature کے لیے teriyaki chicken کو microwave میں گرم کریں۔",
+                    dialogue: "اسے اچھا اور گرم بنائیں!",
+                    timer: 25,
+                    items: [
+                        { name: "Microwave 30s", icon: "📱", stock: 1, correct: true },
+                        { name: "Microwave 60s", icon: "📱", stock: 1, correct: false },
+                        { name: "Skip Heating", icon: "❄️", stock: 1, correct: false },
+                        { name: "Oven Heat", icon: "🔥", stock: 1, correct: false }
+                    ]
+                },
+                {
+                    title: "Chicken شامل کریں",
+                    description: "Heated teriyaki chicken کو bread پر evenly رکھیں۔",
+                    dialogue: "واہ! کتنی اچھی خوشبو ہے! اچھا بھریں!",
+                    timer: 20,
+                    items: [
+                        { name: "4 oz Portion", icon: "🍗", stock: 6, correct: true },
+                        { name: "2 oz Portion", icon: "🍗", stock: 8, correct: false },
+                        { name: "6 oz Portion", icon: "🍗", stock: 4, correct: false },
+                        { name: "Double Meat", icon: "🍗", stock: 2, correct: false }
+                    ]
+                },
+                {
+                    title: "Cheese منتخب کریں",
+                    description: "Teriyaki chicken کے ساتھ best match کرنے والا cheese select کریں۔",
+                    dialogue: "Teriyaki کے ساتھ کون سا cheese اچھا لگتا ہے؟",
+                    timer: 15,
+                    items: [
+                        { name: "Provolone", icon: "🧀", stock: 9, correct: true },
+                        { name: "American", icon: "🧀", stock: 12, correct: false },
+                        { name: "Swiss", icon: "🧀", stock: 6, correct: false },
+                        { name: "Cheddar", icon: "🧀", stock: 8, correct: false }
+                    ]
+                },
+                {
+                    title: "Sandwich Toast کریں",
+                    description: "Cheese melt کرنے اور bread گرم کرنے کے لیے sandwich toast کریں۔",
+                    dialogue: "اسے اس وقت تک toast کریں جب تک cheese perfectly melt نہ ہو جائے!",
+                    timer: 20,
+                    items: [
+                        { name: "Light Toast", icon: "🔥", stock: 1, correct: true },
+                        { name: "Dark Toast", icon: "🔥", stock: 1, correct: false },
+                        { name: "No Toast", icon: "❄️", stock: 1, correct: false },
+                        { name: "Extra Crispy", icon: "🔥", stock: 1, correct: false }
+                    ]
+                },
+                {
+                    title: "Fresh Vegetables شامل کریں",
+                    description: "Teriyaki flavor کو complement کرنے کے لیے crisp vegetables شامل کریں۔",
+                    dialogue: "میں lettuce، tomatoes، اور red onions لوں گا!",
+                    timer: 25,
+                    items: [
+                        { name: "Lettuce", icon: "🥬", stock: 15, correct: true },
+                        { name: "Tomatoes", icon: "🍅", stock: 10, correct: true },
+                        { name: "Red Onions", icon: "🧅", stock: 8, correct: true },
+                        { name: "Pickles", icon: "🥒", stock: 12, correct: false },
+                        { name: "Peppers", icon: "🌶️", stock: 7, correct: false },
+                        { name: "Cucumbers", icon: "🥒", stock: 9, correct: false }
+                    ]
+                },
+                {
+                    title: "Sweet Onion Sauce لگائیں",
+                    description: "Signature Sweet Onion Teriyaki sauce generously شامل کریں۔",
+                    dialogue: "Sweet onion sauce بھولنا نہیں - یہ سب سے best part ہے!",
+                    timer: 15,
+                    items: [
+                        { name: "2 Lines Sauce", icon: "🍯", stock: 1, correct: true },
+                        { name: "1 Line Sauce", icon: "🍯", stock: 1, correct: false },
+                        { name: "3 Lines Sauce", icon: "🍯", stock: 1, correct: false },
+                        { name: "No Sauce", icon: "❌", stock: 1, correct: false }
+                    ]
+                },
+                {
+                    title: "Wrap کریں اور Serve کریں",
+                    description: "Sandwich کو properly wrap کریں اور customer کو present کریں۔",
+                    dialogue: "Perfect! یہ بالکل وہی لگ رہا ہے جو میں چاہتا تھا۔ شکریہ!",
+                    timer: 20,
+                    items: [
+                        { name: "Wrap in Paper", icon: "📄", stock: 20, correct: true },
+                        { name: "Cut in Half", icon: "🔪", stock: 1, correct: true },
+                        { name: "Add to Bag", icon: "🛍️", stock: 15, correct: true },
+                        { name: "Skip Wrapping", icon: "❌", stock: 1, correct: false }
+                    ]
+                }
+            ]
+        };
+
+        // Data SDK handler
+        const dataHandler = {
+            onDataChanged(data) {
+                currentRecordCount = data.length;
+                console.log(`Current record count: ${currentRecordCount}`);
+            }
+        };
+
+        // Element SDK configuration
+        async function onConfigChange(config) {
+            const courseTitle = config.course_title || defaultConfig.course_title;
+            const customerName = config.customer_name || defaultConfig.customer_name;
+            const storeName = config.store_name || defaultConfig.store_name;
+
+            document.getElementById('course-title').textContent = courseTitle;
+            document.getElementById('customer-name').textContent = customerName;
+            document.getElementById('store-name').textContent = storeName;
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [],
+                borderables: [],
+                fontEditable: undefined,
+                fontSizeable: undefined
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["course_title", config.course_title || defaultConfig.course_title],
+                ["customer_name", config.customer_name || defaultConfig.customer_name],
+                ["store_name", config.store_name || defaultConfig.store_name]
+            ]);
+        }
+
+        // Initialize SDKs
+        async function initializeApp() {
+            try {
+                // Initialize Data SDK
+                if (window.dataSdk) {
+                    const initResult = await window.dataSdk.init(dataHandler);
+                    if (!initResult.isOk) {
+                        console.error("Failed to initialize Data SDK");
+                    }
+                }
+
+                // Initialize Element SDK
+                if (window.elementSdk) {
+                    await window.elementSdk.init({
+                        defaultConfig,
+                        onConfigChange,
+                        mapToCapabilities,
+                        mapToEditPanelValues
+                    });
+                }
+
+                // Training will start after safety checklist is completed
+            } catch (error) {
+                console.error("Initialization error:", error);
+                // Continue even if SDK fails - training will start after safety checklist
+            }
+        }
+
+        function showSafetyChecklist() {
+            document.getElementById('welcome-screen').style.display = 'none';
+            document.getElementById('safety-checklist-modal').style.display = 'flex';
+            loadSafetyChecklist();
+        }
+
+        // Language switching functions
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update language button states
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`lang-${lang}`).classList.add('active');
+            
+            // Apply RTL for Urdu
+            const body = document.body;
+            if (lang === 'ur') {
+                body.classList.add('rtl');
+                body.style.fontFamily = 'Noto Nastaliq Urdu, Arial, sans-serif';
+            } else {
+                body.classList.remove('rtl');
+                body.style.fontFamily = 'Arial, sans-serif';
+            }
+            
+            // Update all text content
+            updateLanguageContent();
+        }
+
+        function updateLanguageContent() {
+            const c = content[currentLanguage];
+            
+            // Update welcome screen
+            const welcomeTitle = document.querySelector('.welcome-title');
+            const welcomeSubtitle = document.querySelector('.welcome-subtitle');
+            const welcomeDescription = document.querySelector('.welcome-description');
+            const startBtn = document.querySelector('.start-btn');
+            
+            if (welcomeTitle) welcomeTitle.textContent = c.welcomeTitle;
+            if (welcomeSubtitle) welcomeSubtitle.textContent = c.welcomeSubtitle;
+            if (welcomeDescription) welcomeDescription.textContent = c.welcomeDescription;
+            if (startBtn) startBtn.innerHTML = c.startButton;
+            
+            // Update safety checklist modal
+            const safetyTitle = document.querySelector('.checklist-header h2');
+            const safetySubtitle = document.querySelector('.checklist-header p');
+            
+            if (safetyTitle) safetyTitle.textContent = c.safetyTitle;
+            if (safetySubtitle) safetySubtitle.textContent = c.safetySubtitle;
+            
+            // Update other UI elements
+            const customerDialogue = document.getElementById('customer-dialogue');
+            const orderDetailsHeader = document.querySelector('.order-details h4');
+            const helpBtn = document.getElementById('help-btn');
+            const nextBtn = document.getElementById('next-btn');
+            
+            if (customerDialogue && !trainingStarted) {
+                customerDialogue.textContent = `"${c.customerOrder}"`;
+            }
+            if (orderDetailsHeader) orderDetailsHeader.textContent = c.orderDetails;
+            if (helpBtn) helpBtn.innerHTML = c.needHelp;
+            if (nextBtn) nextBtn.innerHTML = c.continue;
+            
+            // Update order status labels
+            const orderStatus = document.getElementById('order-status');
+            if (orderStatus && orderStatus.textContent === 'Waiting') {
+                orderStatus.textContent = c.waiting;
+            } else if (orderStatus && orderStatus.textContent === 'In Progress') {
+                orderStatus.textContent = c.inProgress;
+            }
+            
+            // Reload safety checklist if visible
+            if (document.getElementById('safety-checklist-modal').style.display === 'flex') {
+                loadSafetyChecklist();
+            }
+            
+            // Update current step if training is active
+            if (trainingStarted && currentStep > 0) {
+                updateStepLanguage();
+            }
+        }
+
+        function updateStepLanguage() {
+            const steps = trainingSteps[currentLanguage];
+            if (!steps || currentStep > steps.length) return;
+            
+            const step = steps[currentStep - 1];
+            const c = content[currentLanguage];
+            
+            // Update step content
+            document.getElementById('step-title').textContent = `Step ${currentStep}: ${step.title}`;
+            document.getElementById('step-description').textContent = step.description;
+            document.getElementById('customer-dialogue').textContent = `"${step.dialogue}"`;
+            
+            // Update available options header
+            const optionsHeader = document.querySelector('#ingredient-content h3');
+            if (optionsHeader) optionsHeader.textContent = c.availableOptions;
+        }
+
+        function loadSafetyChecklist() {
+            const container = document.getElementById('safety-checks');
+            const checks = safetyChecklist[currentLanguage];
+            container.innerHTML = checks.map((check, index) => `
+                <div class="safety-check-item" data-check-id="${check.id}" onclick="toggleSafetyCheck('${check.id}')">
+                    <div class="check-toggle">
+                        <span class="check-mark" style="display: none;">✓</span>
+                    </div>
+                    <div class="check-content">
+                        <div class="check-title">${check.title}</div>
+                        <p class="check-description">${check.description}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleSafetyCheck(checkId) {
+            const checkElement = document.querySelector(`[data-check-id="${checkId}"]`);
+            const checkMark = checkElement.querySelector('.check-mark');
+            
+            if (safetyChecksCompleted.includes(checkId)) {
+                // Uncheck
+                safetyChecksCompleted = safetyChecksCompleted.filter(id => id !== checkId);
+                checkElement.classList.remove('completed');
+                checkMark.style.display = 'none';
+            } else {
+                // Check
+                safetyChecksCompleted.push(checkId);
+                checkElement.classList.add('completed');
+                checkMark.style.display = 'block';
+            }
+            
+            updateChecklistProgress();
+        }
+
+        function updateChecklistProgress() {
+            const checks = safetyChecklist[currentLanguage];
+            const progress = (safetyChecksCompleted.length / checks.length) * 100;
+            document.getElementById('checklist-progress-fill').style.width = `${progress}%`;
+            
+            const startBtn = document.getElementById('start-training-btn');
+            const c = content[currentLanguage];
+            
+            if (safetyChecksCompleted.length === checks.length) {
+                startBtn.disabled = false;
+                startBtn.textContent = c.allChecksComplete;
+            } else {
+                startBtn.disabled = true;
+                startBtn.textContent = `${c.completeAllChecks} (${safetyChecksCompleted.length}/${checks.length})`;
+            }
+        }
+
+        function startActualTraining() {
+            const checks = safetyChecklist[currentLanguage];
+            if (safetyChecksCompleted.length !== checks.length) {
+                return;
+            }
+            
+            document.getElementById('safety-checklist-modal').style.display = 'none';
+            document.getElementById('main-content').style.display = 'flex';
+            trainingStarted = true;
+            startTraining();
+        }
+
+        function startTraining() {
+            sessionStartTime = Date.now();
+            startSessionTimer();
+            loadStep(1);
+        }
+
+        function startSessionTimer() {
+            sessionInterval = setInterval(() => {
+                const elapsed = Math.floor((Date.now() - sessionStartTime) / 1000);
+                const minutes = Math.floor(elapsed / 60);
+                const seconds = elapsed % 60;
+                document.getElementById('session-timer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        function loadStep(stepNumber) {
+            const steps = trainingSteps[currentLanguage];
+            if (stepNumber > steps.length) {
+                completeTraining();
+                return;
+            }
+
+            currentStep = stepNumber;
+            const step = steps[stepNumber - 1];
+            const c = content[currentLanguage];
+            
+            // Update UI
+            document.getElementById('step-title').textContent = `Step ${stepNumber}: ${step.title}`;
+            document.getElementById('step-description').textContent = step.description;
+            document.getElementById('step-counter').textContent = `${stepNumber}/${steps.length}`;
+            document.getElementById('customer-dialogue').textContent = `"${step.dialogue}"`;
+            document.getElementById('order-status').textContent = c.inProgress;
+            
+            // Update progress
+            const progress = (stepNumber / steps.length) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+
+            // Load ingredients
+            loadIngredients(step.items);
+            
+            // Start step timer
+            startStepTimer(step.timer);
+            
+            // Reset selections
+            selectedItems = [];
+            document.getElementById('next-btn').disabled = true;
+        }
+
+        function loadIngredients(items) {
+            const container = document.getElementById('ingredient-content');
+            const c = content[currentLanguage];
+            container.innerHTML = `
+                <h3>${c.availableOptions}</h3>
+                <div class="ingredient-grid">
+                    ${items.map((item, index) => `
+                        <div class="ingredient-item" data-index="${index}" onclick="selectIngredient(${index})">
+                            <div class="ingredient-icon">${item.icon}</div>
+                            <div class="stock-indicator ${item.stock < 3 ? 'low' : item.stock === 0 ? 'out' : ''}">${item.stock}</div>
+                            <h4>${item.name}</h4>
+                            <p>${c.stock} ${item.stock}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function selectIngredient(index) {
+            const steps = trainingSteps[currentLanguage];
+            const step = steps[currentStep - 1];
+            const item = step.items[index];
+            
+            if (item.stock === 0) return;
+            
+            const element = document.querySelector(`[data-index="${index}"]`);
+            
+            if (element.classList.contains('selected')) {
+                // Deselect
+                element.classList.remove('selected');
+                selectedItems = selectedItems.filter(i => i !== index);
+            } else {
+                // For single selection steps, clear previous selections
+                if (currentStep !== 6) { // Step 6 allows multiple selections (vegetables)
+                    document.querySelectorAll('.ingredient-item.selected').forEach(el => {
+                        el.classList.remove('selected');
+                    });
+                    selectedItems = [];
+                }
+                
+                // Select new item
+                element.classList.add('selected');
+                selectedItems.push(index);
+            }
+            
+            // Check if we can proceed
+            checkCanProceed();
+        }
+
+        function checkCanProceed() {
+            const steps = trainingSteps[currentLanguage];
+            if (!steps || currentStep < 1 || currentStep > steps.length) return;
+            
+            const step = steps[currentStep - 1];
+            let canProceed = false;
+            
+            if (currentStep === 6) { // Vegetables step - need at least one correct
+                canProceed = selectedItems.some(index => step.items[index].correct);
+            } else {
+                canProceed = selectedItems.length > 0;
+            }
+            
+            const nextBtn = document.getElementById('next-btn');
+            if (nextBtn) {
+                nextBtn.disabled = !canProceed;
+            }
+        }
+
+        function startStepTimer(duration) {
+            stepTimer = duration;
+            stepStartTime = Date.now();
+            document.getElementById('step-timer').textContent = stepTimer;
+            
+            clearInterval(stepInterval);
+            stepInterval = setInterval(() => {
+                stepTimer--;
+                document.getElementById('step-timer').textContent = stepTimer;
+                
+                if (stepTimer <= 0) {
+                    clearInterval(stepInterval);
+                    // Auto-proceed or show timeout
+                    if (selectedItems.length === 0) {
+                        mistakes++;
+                        updateStats();
+                        showTimeoutMessage();
+                    }
+                }
+            }, 1000);
+        }
+
+        function showTimeoutMessage() {
+            const customerDialogue = document.getElementById('customer-dialogue');
+            const c = content[currentLanguage];
+            customerDialogue.textContent = `"${c.timeoutMessage}"`;
+            customerDialogue.style.color = '#dc3545';
+            
+            setTimeout(() => {
+                customerDialogue.style.color = '#000';
+            }, 3000);
+        }
+
+        async function proceedToNext() {
+            if (selectedItems.length === 0) return;
+            
+            const steps = trainingSteps[currentLanguage];
+            if (!steps || currentStep < 1 || currentStep > steps.length) return;
+            
+            const step = steps[currentStep - 1];
+            let stepScore = 0;
+            let hasCorrect = false;
+            
+            // Calculate score for this step
+            selectedItems.forEach(index => {
+                const item = step.items[index];
+                if (item.correct) {
+                    hasCorrect = true;
+                    stepScore += 10;
+                } else {
+                    mistakes++;
+                }
+            });
+            
+            if (!hasCorrect && currentStep !== 6) {
+                mistakes++;
+            }
+            
+            // Bonus for speed
+            const timeBonus = Math.max(0, stepTimer * 2);
+            stepScore += timeBonus;
+            
+            score += stepScore;
+            updateStats();
+            
+            // Show loading
+            showLoading();
+            
+            // Save progress
+            await saveProgress();
+            
+            // Update sandwich preview
+            updateSandwichPreview();
+            
+            setTimeout(() => {
+                hideLoading();
+                loadStep(currentStep + 1);
+            }, 1500);
+        }
+
+        function updateSandwichPreview() {
+            const preview = document.getElementById('sandwich-preview');
+            const layers = ['#8B4513', '#FF6B35', '#4CAF50', '#FFD700', '#FF4444'];
+            const layerHeight = Math.min(currentStep * 8, 60);
+            
+            // Add visual layers as we progress
+            if (currentStep > 2) {
+                const newLayer = document.createElement('div');
+                newLayer.className = 'sandwich-layer';
+                newLayer.style.background = layers[currentStep % layers.length];
+                newLayer.style.height = '8px';
+                newLayer.style.bottom = `${15 + (currentStep - 3) * 8}px`;
+                preview.appendChild(newLayer);
+            }
+        }
+
+        async function saveProgress() {
+            if (!window.dataSdk || currentRecordCount >= 999) return;
+            
+            try {
+                const progressData = {
+                    session_id: `session_${Date.now()}`,
+                    step_completed: currentStep,
+                    completion_time: new Date().toISOString(),
+                    score: score,
+                    mistakes: mistakes
+                };
+                
+                const result = await window.dataSdk.create(progressData);
+                if (!result.isOk) {
+                    console.error("Failed to save progress");
+                }
+            } catch (error) {
+                console.error("Error saving progress:", error);
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('score-display').textContent = `Score: ${score}`;
+            document.getElementById('mistakes-display').textContent = `Mistakes: ${mistakes}`;
+        }
+
+        function showLoading() {
+            const c = content[currentLanguage];
+            const loadingText = document.querySelector('.loading-content p');
+            if (loadingText) loadingText.textContent = c.preparingFood;
+            document.getElementById('loading-overlay').style.display = 'flex';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading-overlay').style.display = 'none';
+        }
+
+        async function completeTraining() {
+            clearInterval(stepInterval);
+            clearInterval(sessionInterval);
+            
+            const totalTime = Math.floor((Date.now() - sessionStartTime) / 1000);
+            const finalScore = Math.max(0, score - (mistakes * 5));
+            const c = content[currentLanguage];
+            
+            // Save final results
+            await saveProgress();
+            
+            // Show completion modal
+            document.getElementById('final-stats').innerHTML = `
+                <p><strong>${c.finalScore}</strong> ${finalScore}</p>
+                <p><strong>${c.totalTime}</strong> ${Math.floor(totalTime / 60)}:${(totalTime % 60).toString().padStart(2, '0')}</p>
+                <p><strong>${c.mistakes}</strong> ${mistakes}</p>
+                <p><strong>${c.grade}</strong> ${getGrade(finalScore, mistakes)}</p>
+            `;
+            
+            // Update completion modal text
+            document.querySelector('.modal-content h2').textContent = c.congratulations;
+            document.querySelector('.modal-content p').textContent = c.completionMessage;
+            document.querySelector('.modal-content .btn').innerHTML = c.trainAgain;
+            
+            document.getElementById('completion-modal').style.display = 'flex';
+            document.getElementById('customer-dialogue').textContent = `"${c.perfectMessage}"`;
+            document.getElementById('order-status').textContent = c.completed;
+        }
+
+        function getGrade(score, mistakes) {
+            if (mistakes === 0 && score >= 100) return 'A+ (Excellent!)';
+            if (mistakes <= 1 && score >= 80) return 'A (Great Job!)';
+            if (mistakes <= 2 && score >= 60) return 'B (Good Work!)';
+            if (mistakes <= 3 && score >= 40) return 'C (Keep Practicing!)';
+            return 'D (Needs Improvement)';
+        }
+
+        function restartTraining() {
+            // Reset all variables
+            currentStep = 1;
+            score = 0;
+            mistakes = 0;
+            selectedItems = [];
+            safetyChecksCompleted = [];
+            trainingStarted = false;
+            
+            // Hide modal and main content
+            document.getElementById('completion-modal').style.display = 'none';
+            document.getElementById('main-content').style.display = 'none';
+            
+            // Clear sandwich preview
+            const preview = document.getElementById('sandwich-preview');
+            preview.innerHTML = `
+                <div class="sandwich-layer bread-top"></div>
+                <div class="sandwich-layer bread-bottom"></div>
+            `;
+            
+            // Show welcome screen
+            document.getElementById('welcome-screen').style.display = 'block';
+            
+            // Clear intervals
+            clearInterval(stepInterval);
+            clearInterval(sessionInterval);
+        }
+
+        function showHelp() {
+            const steps = trainingSteps[currentLanguage];
+            const step = steps[currentStep - 1];
+            const correctItems = step.items.filter(item => item.correct);
+            const helpText = `Hint: Look for ${correctItems.map(item => item.name).join(', ')}`;
+            
+            const customerDialogue = document.getElementById('customer-dialogue');
+            const originalText = customerDialogue.textContent;
+            customerDialogue.textContent = `"${helpText}"`;
+            customerDialogue.style.color = '#007bff';
+            
+            setTimeout(() => {
+                customerDialogue.textContent = originalText;
+                customerDialogue.style.color = '#000';
+            }, 3000);
+        }
+
+        // Event listeners
+        document.getElementById('next-btn').addEventListener('click', proceedToNext);
+        document.getElementById('help-btn').addEventListener('click', showHelp);
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeApp();
+            // Show welcome screen by default
+            document.getElementById('welcome-screen').style.display = 'block';
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e681f9579ad055',t:'MTc2MzEyMzI5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
