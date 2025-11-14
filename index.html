@@ -671,20 +671,449 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.15);
         }
 
+        /* Mobile-first responsive design */
         @media (max-width: 768px) {
+            .header {
+                padding: 0.75rem 1rem;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .logo-section {
+                flex: 1;
+                min-width: 200px;
+            }
+            
+            .logo-section h1 {
+                font-size: 1rem !important;
+            }
+            
+            .logo-section p {
+                font-size: 0.8rem !important;
+            }
+            
+            .stats-bar {
+                gap: 0.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 100%;
+                order: 3;
+            }
+            
+            .stat-item {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+                min-width: auto;
+            }
+            
+            .language-selector {
+                order: 2;
+                margin-left: auto;
+            }
+            
+            .lang-btn {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.8rem;
+            }
+            
             .main-content {
                 flex-direction: column;
                 height: auto;
+                min-height: calc(100vh - 120px);
             }
             
             .customer-area {
                 width: 100%;
                 padding: 1rem;
+                border-right: none;
+                border-bottom: 3px solid #00923f;
+                min-height: auto;
+            }
+            
+            .rtl .customer-area {
+                border-left: none;
+                border-bottom: 3px solid #00923f;
+            }
+            
+            .customer-avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+                margin-bottom: 0.75rem;
+            }
+            
+            .customer-speech {
+                max-width: 100%;
+                padding: 1rem;
+                font-size: 0.9rem;
+                margin-bottom: 0.75rem;
+            }
+            
+            .order-details {
+                padding: 0.75rem;
+                font-size: 0.85rem;
+            }
+            
+            .sandwich-preview {
+                width: 120px;
+                height: 60px;
+                margin: 0.75rem auto;
+            }
+            
+            .workspace {
+                padding: 1rem;
+                flex: 1;
+            }
+            
+            .step-header {
+                padding: 1rem;
+                margin-bottom: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .step-info h2 {
+                font-size: 1.2rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .step-info p {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+            
+            .step-counter {
+                align-self: center;
+                font-size: 0.9rem;
+            }
+            
+            .timer-display {
+                font-size: 1rem;
+                justify-content: center;
+            }
+            
+            .ingredient-station {
+                padding: 1rem;
             }
             
             .ingredient-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+                margin-bottom: 1.5rem;
             }
+            
+            .ingredient-item {
+                padding: 0.75rem;
+                min-height: 120px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                touch-action: manipulation;
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            .ingredient-item h4 {
+                font-size: 0.85rem;
+                margin: 0.5rem 0 0.25rem 0;
+                line-height: 1.2;
+            }
+            
+            .ingredient-item p {
+                font-size: 0.75rem;
+                margin: 0;
+            }
+            
+            .ingredient-icon {
+                font-size: 1.5rem;
+                margin-bottom: 0.25rem;
+            }
+            
+            .stock-indicator {
+                width: 20px;
+                height: 20px;
+                font-size: 0.7rem;
+                top: -8px;
+                right: -8px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 0.75rem;
+                margin-top: 1.5rem;
+            }
+            
+            .btn {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.95rem;
+                width: 100%;
+                justify-content: center;
+                touch-action: manipulation;
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            .welcome-screen {
+                padding: 2rem 1rem;
+                min-height: calc(100vh - 120px);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            
+            .welcome-title {
+                font-size: 1.8rem;
+                margin-bottom: 0.75rem;
+                line-height: 1.2;
+            }
+            
+            .welcome-subtitle {
+                font-size: 1rem;
+                margin-bottom: 0.75rem;
+                line-height: 1.3;
+            }
+            
+            .welcome-description {
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
+                line-height: 1.4;
+                max-width: 100%;
+            }
+            
+            .start-btn {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+                justify-content: center;
+                touch-action: manipulation;
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            .safety-checklist-modal .checklist-content {
+                margin: 1rem;
+                padding: 1.5rem;
+                max-width: calc(100vw - 2rem);
+                max-height: calc(100vh - 2rem);
+                border-radius: 10px;
+            }
+            
+            .checklist-header h2 {
+                font-size: 1.4rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .checklist-header p {
+                font-size: 0.9rem;
+            }
+            
+            .safety-check-item {
+                padding: 0.875rem;
+                margin-bottom: 0.5rem;
+                touch-action: manipulation;
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            .check-toggle {
+                width: 20px;
+                height: 20px;
+                margin-right: 0.75rem;
+                flex-shrink: 0;
+            }
+            
+            .rtl .check-toggle {
+                margin-left: 0.75rem;
+                margin-right: 0;
+            }
+            
+            .check-title {
+                font-size: 0.9rem;
+                margin-bottom: 0.25rem;
+            }
+            
+            .check-description {
+                font-size: 0.8rem;
+                line-height: 1.3;
+            }
+            
+            .start-training-btn {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.95rem;
+                width: 100%;
+                touch-action: manipulation;
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            .completion-modal .modal-content {
+                margin: 1rem;
+                padding: 2rem 1.5rem;
+                max-width: calc(100vw - 2rem);
+                border-radius: 15px;
+            }
+            
+            .completion-modal h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            .completion-modal p {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+            
+            .success-icon {
+                font-size: 3rem;
+                margin-bottom: 0.75rem;
+            }
+            
+            #final-stats {
+                font-size: 0.85rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            #final-stats p {
+                margin: 0.25rem 0;
+            }
+            
+            .loading-overlay .loading-content {
+                margin: 1rem;
+                padding: 1.5rem;
+                max-width: calc(100vw - 2rem);
+                border-radius: 10px;
+            }
+            
+            .loading-content p {
+                font-size: 0.9rem;
+                margin-top: 1rem;
+            }
+            
+            .spinner {
+                width: 35px;
+                height: 35px;
+                border-width: 3px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header {
+                padding: 0.5rem 0.75rem;
+            }
+            
+            .logo {
+                width: 35px;
+                height: 35px;
+                font-size: 1.2rem;
+            }
+            
+            .logo-section h1 {
+                font-size: 0.9rem !important;
+            }
+            
+            .logo-section p {
+                font-size: 0.75rem !important;
+            }
+            
+            .stats-bar {
+                gap: 0.25rem;
+            }
+            
+            .stat-item {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.8rem;
+            }
+            
+            .ingredient-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+            }
+            
+            .ingredient-item {
+                padding: 0.5rem;
+                min-height: 100px;
+            }
+            
+            .ingredient-item h4 {
+                font-size: 0.8rem;
+            }
+            
+            .ingredient-item p {
+                font-size: 0.7rem;
+            }
+            
+            .ingredient-icon {
+                font-size: 1.25rem;
+            }
+            
+            .welcome-title {
+                font-size: 1.5rem;
+            }
+            
+            .welcome-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .welcome-description {
+                font-size: 0.85rem;
+            }
+            
+            .step-info h2 {
+                font-size: 1.1rem;
+            }
+            
+            .customer-speech {
+                font-size: 0.85rem;
+                padding: 0.875rem;
+            }
+            
+            .order-details {
+                font-size: 0.8rem;
+                padding: 0.625rem;
+            }
+        }
+        
+        /* Touch-friendly improvements */
+        .ingredient-item:active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease;
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+            transition: transform 0.1s ease;
+        }
+        
+        .lang-btn:active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease;
+        }
+        
+        .start-btn:active {
+            transform: scale(0.98);
+            transition: transform 0.1s ease;
+        }
+        
+        .safety-check-item:active {
+            transform: scale(0.98);
+            transition: transform 0.1s ease;
+        }
+        
+        /* Prevent zoom on input focus for iOS */
+        input, select, textarea {
+            font-size: 16px;
+        }
+        
+        /* Better scrolling on mobile */
+        .checklist-content {
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        /* Ensure proper viewport handling */
+        .training-container {
+            min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
         }
     </style>
   <style>@view-transition { navigation: auto; }</style>
@@ -1750,5 +2179,5 @@
             document.getElementById('welcome-screen').style.display = 'block';
         });
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e681f9579ad055',t:'MTc2MzEyMzI5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e68edef007e280',t:'MTc2MzEyMzgyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
